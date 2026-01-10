@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ClassDemoHelloworldApplication<class-demo-helloworld>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.vtxlab.demo.helloworld.class_demo_helloworld.ClassDemoHelloworldApplication",
+      "projectName": "class-demo-helloworld",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
