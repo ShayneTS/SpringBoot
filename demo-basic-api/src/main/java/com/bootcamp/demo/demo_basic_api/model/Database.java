@@ -9,6 +9,6 @@ public class Database {
 
   public static List<Cat> cats = new LinkedList<>();
 
-  public static List<Student> students = new ArrayList<>();
+  public static List<Student> students = new LinkedList<>();
 
 }
