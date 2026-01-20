@@ -3,7 +3,7 @@ package com.calculator.demo_bc_calculator.model;
 import org.springframework.stereotype.Component;
 
 // stateless (c1.sum(3,7))
-@Component // ! Create a bean of Cat
+@Component // ! Create a bean of Cat, put it into Spring Context
 
 public class Cat {
   public int sum(int x, int y){
