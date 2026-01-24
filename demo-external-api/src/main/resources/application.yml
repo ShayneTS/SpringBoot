@@ -10,3 +10,13 @@ spring:
       ddl-auto: update
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
+
+# similar to static variable in java
+
+external-api:
+  jsonplaceholder:
+    domain: "jsonplaceholder.typicode.com"
+    paths:
+      user-path: "/users"
+      post-path: "/posts"
+      comment-path: "/comments" # Homework

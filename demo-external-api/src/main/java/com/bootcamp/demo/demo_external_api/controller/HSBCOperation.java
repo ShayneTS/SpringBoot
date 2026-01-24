@@ -12,4 +12,6 @@ public interface HSBCOperation {
   @GetMapping(value = "/hsbc/cat")
   Cat getCat();
 
+  
+
 }

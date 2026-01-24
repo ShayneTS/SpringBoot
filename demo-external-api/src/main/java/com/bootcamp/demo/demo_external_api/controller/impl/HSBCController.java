@@ -1,10 +1,12 @@
 package com.bootcamp.demo.demo_external_api.controller.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.demo.demo_external_api.controller.HSBCOperation;
+import com.bootcamp.demo.demo_external_api.dto.PostDto;
 import com.bootcamp.demo.demo_external_api.dto.UserDto;
 import com.bootcamp.demo.demo_external_api.mapper.DtoMapper;
 import com.bootcamp.demo.demo_external_api.model.Cat;
@@ -24,6 +26,18 @@ public class HSBCController implements HSBCOperation {
     return this.jsonPlaceHolderService.getUsers().stream() //
         .map(e -> this.dtoMapper.map(e)) //
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<PostDto> getPosts(){
+    List<PostDto> postDtos = new ArrayList<>();
+    List<PostPTO> serviceResults = this.jsonPlaceHolderService.getPosts();
+    for (PostDTO postDTO : serviceResults) {
+      PostDto postDto = this.dtoMapper.map(postDTO);
+      postDtos.add(postDto);
+    }
+
+    return postDtos;
   }
 
   @Override

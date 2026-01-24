@@ -1,14 +1,13 @@
 package com.bootcamp.demo.demo_external_api.dto;
 
-
 import lombok.Builder;
 import lombok.Getter;
 
-@Getter
 @Builder
-public class UserDto {
+@Getter
+public class PostDto {
+  private Long userId; // need or not?
   private Long id;
-  private String name;
-  private String email;
-  private String phone;
+  private String title;
+  private String body;
 }

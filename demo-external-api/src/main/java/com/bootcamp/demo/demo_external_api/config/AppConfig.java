@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import com.bootcamp.demo.demo_external_api.mapper.DtoMapper;
+import com.bootcamp.demo.demo_external_api.mapper.EntityMapper;
 import com.bootcamp.demo.demo_external_api.model.Cat;
 
 @Configuration
@@ -28,4 +29,8 @@ public class AppConfig {
     return new DtoMapper();
   }
 
+  @Bean
+  EntityMapper entityMapper(){
+    return new EntityMapper();
+  }
 }
