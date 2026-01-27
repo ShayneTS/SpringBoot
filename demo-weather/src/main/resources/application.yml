@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/bootcamp_2510p"
+    username: "root"
+    password: "Admin1234$"
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+
+# https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=tc
+
+api:
+  data-weather:
+  domain: "data.weather.gov.hk"
+  path-segment: "weatherAPI/opendata"
+  path: "weather.php"
+  datatype:
+    nineday: "fnd"
