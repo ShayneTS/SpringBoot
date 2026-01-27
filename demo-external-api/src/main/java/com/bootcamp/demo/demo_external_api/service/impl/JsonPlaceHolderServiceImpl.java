@@ -16,16 +16,14 @@ import com.bootcamp.demo.demo_external_api.mapper.EntityMapper;
 import com.bootcamp.demo.demo_external_api.model.Cat;
 import com.bootcamp.demo.demo_external_api.model.dto.PostDTO;
 import com.bootcamp.demo.demo_external_api.model.dto.UserDTO;
+import com.bootcamp.demo.demo_external_api.repository.PostRepository;
 import com.bootcamp.demo.demo_external_api.repository.UserRepository;
 import com.bootcamp.demo.demo_external_api.service.JsonPlaceHolderService;
 
 @Service
-public class JsonPlaceHolderServiceImpl implements JsonPlaceHolderService{
+public class JsonPlaceHolderServiceImpl implements JsonPlaceHolderService {
 
   // private static String url = "https://jsonplaceholder.typicode.com/users";
-  //https://jsonplaceholder.typicode.com/users
-
-  private static final String postPath = null;
 
   @Value("${external-api.jsonplaceholder.domain}")
   private String domain;
@@ -33,7 +31,8 @@ public class JsonPlaceHolderServiceImpl implements JsonPlaceHolderService{
   @Value("${external-api.jsonplaceholder.paths.user-path}")
   private String userPath;
 
-  // ! post path?
+  @Value("${external-api.jsonplaceholder.paths.post-path}")
+  private String postPath;
 
   @Autowired
   private RestTemplate restTemplate;
@@ -44,12 +43,12 @@ public class JsonPlaceHolderServiceImpl implements JsonPlaceHolderService{
 
   @Autowired
   private EntityMapper entityMapper;
-  
-  @Autowired
-  private UserRepository userRepository; //Flyable
 
   @Autowired
-  // ...
+  private UserRepository userRepository;
+
+  @Autowired
+  private PostRepository postRepository;
 
   @Override
   public List<UserDTO> getUsers() {
@@ -62,23 +61,15 @@ public class JsonPlaceHolderServiceImpl implements JsonPlaceHolderService{
     System.out.println("url=" + url);
     UserDTO[] userDTOs = this.restTemplate.getForObject(url, UserDTO[].class);
 
-    // List<DTO> -> List<UserEntity>
+    // List<UserDTO> -> List<UserEntity>
     // EntityMapper
     List<UserEntity> userEntities = Arrays.asList(userDTOs).stream() //
-      .map(e -> this.entityMapper.map(e)) //
-      .collect(Collectors.toList());
-
+        .map(e -> this.entityMapper.map(e)) //
+        .collect(Collectors.toList());
     // insert DB
     this.userRepository.saveAll(userEntities);
 
     return Arrays.asList(userDTOs);
-  }
-
-
-
-  @Override
-  public Cat getCat() {
-    return this.ijk;
   }
 
   // ! User Login -> userid + Post Object -> call backend
@@ -92,20 +83,25 @@ public class JsonPlaceHolderServiceImpl implements JsonPlaceHolderService{
         .toUriString(); //
     System.out.println("url=" + url);
     PostDTO[] postDtos = this.restTemplate.getForObject(url, PostDTO[].class);
+    
     // ! List<PostDTO> -> List<PostEntity>
     List<PostEntity> postEntities = Arrays.asList(postDtos).stream() //
         .map(e -> {
           // Find UserEntity by given user id
           UserEntity userEntity = this.userRepository.findById(e.getUserId())
-            .orElseThrow(() -> new IllegalArgumentException());
-            PostEntity postEntity = this.entityMapper.map(e);
-            postEntity.setUserEntity(userEntity); // ! set FK
-            return postEntity;
+              .orElseThrow(() -> new IllegalArgumentException());
+          PostEntity postEntity = this.entityMapper.map(e);
+          postEntity.setUserEntity(userEntity); // ! Set FK
+          return postEntity;
         }).collect(Collectors.toList());
-        
+
     this.postRepository.saveAll(postEntities);
 
     return Arrays.asList(postDtos);
   }
 
+  @Override
+  public Cat getCat() {
+    return this.ijk;
+  }
 }

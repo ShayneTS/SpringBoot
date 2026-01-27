@@ -1,7 +1,5 @@
 package com.calculator.demo_bc_calculator.controller;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,17 +22,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController // ! @Controller + @ResponseBody
 public class CalculatorController {
 
-  @Autowired
+  // @Autowired
   private CalculatorService calculatorService;
+
   // ! GET http://localhost:8080/operation?x=3.0&y=11.5&operation=MUL
   @GetMapping(value = "/operation")
   public ApiResponse calculate1(@RequestParam String x, @RequestParam String y,
       @RequestParam Operation operation) {
     double result = -1.0;
     try {
-      result = this.calculatorService.calculate(Double.valueOf(x), 
-        Double.valueOf(y), operation);
-    } catch (NumberFormatException e) { 
+      result = this.calculatorService.calculate(Double.valueOf(x),
+          Double.valueOf(y), operation);
+    } catch (NumberFormatException e) {
       // TBC
     }
     return DTOMapper.map(x, y, operation, String.valueOf(result));
@@ -46,7 +45,7 @@ public class CalculatorController {
   public ApiResponse calculate2(@RequestBody ApiRequest request) {
     double result = -1.0;
     try {
-      result = calculate(Double.valueOf(request.getX()),
+      result = this.calculatorService.calculate(Double.valueOf(request.getX()),
           Double.valueOf(request.getY()), request.getOperation());
     } catch (NumberFormatException e) {
       // TBC
@@ -60,7 +59,8 @@ public class CalculatorController {
       @PathVariable Operation operation) {
     double result = -1.0;
     try {
-      result = calculate(Double.valueOf(x), Double.valueOf(y), operation);
+      result = this.calculatorService.calculate(Double.valueOf(x),
+          Double.valueOf(y), operation);
     } catch (NumberFormatException e) {
       // TBC
     }
@@ -71,9 +71,5 @@ public class CalculatorController {
         .result(String.valueOf(result)) //
         .build();
   }
-
-  // in Spring, not so popular to write static method
-  // static method, use input to give output
-  // can put static method anywhere
 
 }

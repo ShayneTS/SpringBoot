@@ -10,6 +10,7 @@ import com.bootcamp.demo.demo_external_api.dto.PostDto;
 import com.bootcamp.demo.demo_external_api.dto.UserDto;
 import com.bootcamp.demo.demo_external_api.mapper.DtoMapper;
 import com.bootcamp.demo.demo_external_api.model.Cat;
+import com.bootcamp.demo.demo_external_api.model.dto.PostDTO;
 import com.bootcamp.demo.demo_external_api.service.JsonPlaceHolderService;
 
 @RestController
@@ -29,14 +30,13 @@ public class HSBCController implements HSBCOperation {
   }
 
   @Override
-  public List<PostDto> getPosts(){
+  public List<PostDto> getPosts() {
     List<PostDto> postDtos = new ArrayList<>();
-    List<PostPTO> serviceResults = this.jsonPlaceHolderService.getPosts();
+    List<PostDTO> serviceResults = this.jsonPlaceHolderService.getPosts();
     for (PostDTO postDTO : serviceResults) {
       PostDto postDto = this.dtoMapper.map(postDTO);
       postDtos.add(postDto);
     }
-
     return postDtos;
   }
 

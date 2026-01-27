@@ -1,6 +1,5 @@
 package com.bootcamp.demo.demo_external_api.dto;
 
-
 import lombok.Builder;
 import lombok.Getter;
 
