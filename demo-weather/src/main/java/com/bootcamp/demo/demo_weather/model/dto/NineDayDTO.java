@@ -12,8 +12,8 @@ public class NineDayDTO extends WeatherDTO {
   private String generalSituation;
   @JsonProperty(value = "weatherForecast")
   private List<ForecastDTO> weatherForecasts;
-  // TBC. (zone)
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Hong_Kong")
+
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Asia/Hong_Kong")
   private LocalDateTime updateTime;
   private ValueDTO2 seaTemp;
   @JsonProperty(value = "soilTemp")
@@ -24,16 +24,15 @@ public class NineDayDTO extends WeatherDTO {
     private String place;
     private Double value;
     private String unit;
-    // TBC. (zone)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Hong_Kong")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Asia/Hong_Kong")
     private LocalDateTime recordTime;
     private DepthDTO depth;
-  }
 
-  @Getter
-  public static class DepthDTO{
-    private String unit;
-    private Double value;
+    @Getter
+    public static class DepthDTO {
+      private String unit;
+      private Double value;
+    }
   }
 
   @Getter
@@ -41,16 +40,16 @@ public class NineDayDTO extends WeatherDTO {
     @JsonFormat(pattern = "yyyyMMdd")
     private LocalDate forecastDate;
     private String week;
-    @JsonProperty(value = "forecaseWind")
+    @JsonProperty(value = "forecastWind")
     private String wind;
-    @JsonProperty(value = "forecaseWeather")
+    @JsonProperty(value = "forecastWeather")
     private String description;
     private ValueDTO forecastMaxtemp;
     private ValueDTO forecastMintemp;
     private ValueDTO forecastMaxrh;
     private ValueDTO forecastMinrh;
-    @JsonProperty(value = "forecastIcon")
-    private Long ForecastIcon;
+    @JsonProperty(value = "ForecastIcon")
+    private Long forecastIcon;
     @JsonProperty(value = "PSR")
     private String psr;
 
@@ -59,6 +58,6 @@ public class NineDayDTO extends WeatherDTO {
       private Double value;
       private String unit;
     }
-    
   }
+
 }

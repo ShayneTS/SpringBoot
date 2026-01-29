@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 // ! insert 9 days data into database per API Call
 // ! means record all history for the call
@@ -29,6 +30,7 @@ public class NineDayEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // then write this
   private Long id; // write this first
+  @Setter
   private LocalDateTime tranTime;
   // API Result
   @Column(name = "forecast_date")
