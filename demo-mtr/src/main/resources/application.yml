@@ -10,3 +10,11 @@ spring:
       ddl-auto: update
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
+
+# https://rt.data.gov.hk/v1/transport/mtr/getSchedule.php?line=TKL&sta=TKO
+
+external-api:
+  mtr:
+    domain: "rt.data.gov.hk"
+    path-segment: "v1/transport/mtr"
+    paths: "/getSchedule.php"
