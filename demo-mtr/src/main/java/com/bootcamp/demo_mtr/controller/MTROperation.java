@@ -8,5 +8,5 @@ import com.bootcamp.demo_mtr.entity.StationEntity;
 public interface MTROperation {
   @PostMapping(value = "/line/{lineCode}/station")
   StationEntity createStation(@PathVariable String lineCode, 
-      @RequestBody stationEntity);
+      @RequestBody StationEntity stationEntity);
 }

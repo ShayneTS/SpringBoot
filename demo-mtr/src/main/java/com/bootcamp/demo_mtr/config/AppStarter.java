@@ -3,8 +3,6 @@ package com.bootcamp.demo_mtr.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.bootcamp.demo_mtr.repository.LineRepository;
-import com.bootcamp.demo_mtr.repository.StationRepository;
 import com.bootcamp.demo_mtr.service.MTRService;
 
 @Component
