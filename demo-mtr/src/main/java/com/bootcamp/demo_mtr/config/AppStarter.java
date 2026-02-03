@@ -14,7 +14,7 @@ public class AppStarter implements CommandLineRunner{
   @Override
   public void run(String... args) throws Exception{
     this.mtrService.deleteAllLines();
-    this.mtrService.deleteAllStaitons();
+    this.mtrService.deleteAllStations();
 
     // insert lines & stations
     this.mtrService.saveLine("AEL","Airport Express");

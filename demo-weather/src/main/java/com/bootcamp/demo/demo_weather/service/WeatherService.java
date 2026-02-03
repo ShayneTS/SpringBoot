@@ -4,7 +4,7 @@ import com.bootcamp.demo.demo_weather.model.DataType;
 import com.bootcamp.demo.demo_weather.model.Lang;
 import com.bootcamp.demo.demo_weather.model.dto.WeatherDTO;
 
-// datatype, language
+// dataType, language
 
 public interface WeatherService {
   WeatherDTO getWeather(DataType dataType, Lang lang);

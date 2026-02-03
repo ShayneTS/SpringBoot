@@ -10,14 +10,11 @@ import com.calculator.demo_bc_calculator.model.Cat;
 @RestController
 public class CatController {
   // ! Refer this reference to the bean in spring context
-  // if not use Spring, then skip line 14, 15
-  @Autowired // injection (注入)
-  private Cat cat; // address
+  @Autowired // Injection (注入)
+  private Cat cat;
 
   @GetMapping(value = "/cat/sum/{x}/{y}")
   public int sum(@PathVariable int x, @PathVariable int y) {
     return this.cat.sum(x, y); // ! NPE if Cat Bean is not ready
-    // if not use Spring, will look like:
-    // return new Cat().sum(x,y);
   }
 }

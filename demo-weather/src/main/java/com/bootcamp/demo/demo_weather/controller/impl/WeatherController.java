@@ -28,7 +28,7 @@ public class WeatherController implements WeatherOperation {
   public List<NineDayDto> getWeather(String dataType, String lang) {
     WeatherDTO weatherDTO =
         weatherService.getWeather(DataType.of(dataType), Lang.of(lang));
-    // refer weather service
+
     NineDayDTO nineDayDTO = null;
     if (weatherDTO instanceof NineDayDTO) {
       nineDayDTO = (NineDayDTO) weatherDTO;

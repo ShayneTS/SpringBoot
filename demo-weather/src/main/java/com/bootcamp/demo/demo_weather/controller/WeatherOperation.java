@@ -7,7 +7,6 @@ import com.bootcamp.demo.demo_weather.dto.NineDayDto;
 
 public interface WeatherOperation {
   @GetMapping(value = "/weather")
-  List<NineDayDto> getWeather(String dataType, 
+  List<NineDayDto> getWeather(@RequestParam String dataType,
       @RequestParam String lang);
-
 }

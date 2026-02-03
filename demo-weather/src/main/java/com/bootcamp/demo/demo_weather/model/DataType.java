@@ -10,15 +10,14 @@ public enum DataType {
 
   private String value;
 
-  private DataType(String value){
+  private DataType(String value) {
     this.value = value;
   }
-  public static Lang of(String lang) {
-    return Arrays.asList(Lang.values()).stream() //
-      .filter(e -> lang.equals(e.getValue())) //
-      .findAny()//
-      .orElseThrow(() -> new IllegalArgumentException("Invalid Language"));
+
+  public static DataType of(String dataType) {
+    return Arrays.asList(DataType.values()).stream() //
+        .filter(e -> dataType.equals(e.getValue())) //
+        .findAny() //
+        .orElseThrow(() -> new IllegalArgumentException("Invalid DataType."));
   }
-
-
 }

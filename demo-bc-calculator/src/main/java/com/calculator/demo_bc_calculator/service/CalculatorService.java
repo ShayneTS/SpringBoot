@@ -5,10 +5,9 @@ import java.math.RoundingMode;
 import org.springframework.stereotype.Service;
 import com.calculator.demo_bc_calculator.model.Operation;
 
-@Service
+// @Service
 public class CalculatorService {
-  
-  public static double calculate(double d1, double d2, Operation operation) {
+  public double calculate(double d1, double d2, Operation operation) {
     return switch (operation) {
       case ADD -> BigDecimal.valueOf(d1).add(BigDecimal.valueOf(d2))
           .doubleValue();

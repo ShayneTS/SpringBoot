@@ -1,12 +1,14 @@
 package com.bootcamp.demo_mtr.model;
 
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Getter;
 
-@Getter
 
+@Getter
+@Builder
 public class Train {
   private String destination;
-  private LocalDateTime;
-  
+  private LocalDateTime arrivalTime;
+  private String direction;
 }
