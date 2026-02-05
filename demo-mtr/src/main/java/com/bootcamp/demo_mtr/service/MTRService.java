@@ -22,4 +22,6 @@ public interface MTRService {
 
   // "TKO", Train Object
   Map<String, List<Train>> getScheduleMap(String lineCode, String stationCode);
+
+  List<StationEntity> getStations(String lineCode);
 }

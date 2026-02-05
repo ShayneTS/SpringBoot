@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class StationEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

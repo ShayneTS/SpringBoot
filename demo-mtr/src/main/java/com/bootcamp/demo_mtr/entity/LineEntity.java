@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class LineEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

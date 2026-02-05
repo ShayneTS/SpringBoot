@@ -1,5 +1,6 @@
 package com.bootcamp.demo_mtr.controller.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.demo_mtr.controller.MTROperation;
 import com.bootcamp.demo_mtr.dto.EarliestScheduleDto;
+import com.bootcamp.demo_mtr.dto.SignalDto;
 import com.bootcamp.demo_mtr.entity.StationEntity;
 import com.bootcamp.demo_mtr.model.Train;
 import com.bootcamp.demo_mtr.model.dto.ScheduleDTO;
@@ -53,5 +55,43 @@ public class MTRController implements MTROperation {
       });
     }
     return earliestScheduleDto;
+  }
+  @Override
+  public SignalDto getSignal(String lineCode){
+    List<StationEntity> stationEntities = this.mtrService.getStations(lineCode);
+    int delayCount = 0;
+    List<String> delayStations = new ArrayList<>();
+    ScheduleDTO scheduleDTO = null;
+    for (StationEntity stationEntity : stationEntities) {
+      scheduleDTO = this.getSchedule(lineCode, stationEntity.getCode());
+      if ("Y".equals(scheduleDTO.getIsdelay())){
+        delayCount++;
+        delayStations.add(stationEntity.getCode());
+      }
+    }
+    String signal = "";
+    if (delayCount >1) {
+      signal = "RED";
+    } else if (delayCount == 1) {
+      signal = "YELLOW";
+    } else {
+      signal = "GREEN";
+    }
+    // stations
+    // loop -> MTR -> isdelay = count
+    // determine signal color
+    // build SignalDto
+    return SignalDto.builder() //
+      .delayStations(delayStations) //
+      .line(lineCode) //
+      .currTime(scheduleDTO.getCurrTime()) //
+      .sysTime(scheduleDTO.getSysTime()) //
+      .signal(signal) //
+      .build();
+  }
+  
+  @Override
+  public List<StationEntity> getStations(String lineCode){
+    return this.mtrService.getStations(lineCode);
   }
 }
