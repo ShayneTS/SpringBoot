@@ -9,12 +9,12 @@ import com.bootcamp.demo.demo_thymeleaf.model.dto.CoinDTO;
 import com.bootcamp.demo.demo_thymeleaf.service.CoinService;
 
 @Service
-public class ConServiceImpl implements CoinService{
+public class CoinServiceImpl implements CoinService {
   @Autowired
   private RestTemplate restTemplate;
 
   @Override
-  public List<CoinDTO> getCoins(){
+  public List<CoinDTO> getCoins() {
     String url = "https://api.coingecko.com/api/v3/coins/markets?ids=bitcoin,ethereum,tether&vs_currency=usd";
     CoinDTO[] coinDTOs = this.restTemplate.getForObject(url, CoinDTO[].class);
     return Arrays.asList(coinDTOs);
