@@ -18,11 +18,21 @@ public class HelloworldController {
 
   @GetMapping(value = "/hello")
   public String firstPage(Model model) {
-    
+
     List<CoinDTO> coinDTOs = this.coinService.getCoins();
     model.addAttribute("coinList", coinDTOs);
 
     model.addAttribute("programming", "Java");
     return "helloworld"; // html file name
   }
+
+  // @GetMapping(value = "/refresh")
+  // public String firstPage(Model model) {
+
+  //   List<CoinDTO> coinDTOs = this.coinService.getCoins();
+  //   model.addAttribute("coinList", coinDTOs);
+
+  //   model.addAttribute("programming", "Java");
+  //   return "helloworld"; // html file name
+  // }
 }

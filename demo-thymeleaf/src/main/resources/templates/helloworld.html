@@ -2,6 +2,7 @@
   <head>
     <title>bootcamp</title>
     <script th:src="@{/js/update-text.js}"></script>
+    <script th:src="@{/js/coin-search.js}"></script>
   </head>
   <body>
     <h1>Biggest</h1>
@@ -11,37 +12,50 @@
     <p th:text="'Programming Language=' + ${programming}"></p>
 
     <input type="text" id="input-box">
-    <button onclick="updateText()"> Update </button>
+    <button onclick="updateText()">Update</button>
     <p id="status">Original Value</p>
 
+    </div>
     <table>
       <thead>
         <tr>
           <th>ID</th>
           <th>Image</th>
           <th>Current Price</th>
+          <th>Price Change (24)</td>
+          <th>Market Capitalization</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each=""coin : ${coinList}>
-          <td th:text="${coin.name}></td>
-          <td><img th:src="${coin.image}" height=""30"></td>
-          <td th:text="${coin.currentPrice}"></td>
+        <tr th:each="coin : ${coinList}">
+          <td th:text="${coin.name}"></td>
+          <td><img th:src="${coin.image}" height="30"></td>
+          <td th:text="'$' + ${#numbers.formatDecimal(coin.currentPrice, 1, 'COMMA', 0, 'POINT')}"></td>
+          <span th:with="roundedPercent = ${T(java.lang.Math).round(coin.priceChangePercentage24h *100)} / 100.0">
+            th:class="${'price-change' + (roundedPercent > 0 ? 'up' : (roundedPercent < 0 ? 'down' : 'neutral'))}">
+              <span th:text="${#roundedPercent > 0 ? '▲' : (roundedPercent < 0 ? '▼' : '')}"></span>
+              <span the:text="${#numbers.formatDecimal(T(java.lang.Math).abs(roundedPercent), 1, 'COMMA', 2, 'POINT')} + '%'"></span>
+          </span>
+          <td th:text="'$' + ${#numbers.formatDecimal(coin.marketCap, 1, 'COMMA', 0, 'POINT')}"></td>
         </tr>
       </tbody>
     </table>
-    
+
+
     <table>
       <tr>
         <th>Name</th>
         <th>Age</th>
       </tr>
+      <tr>
         <td>Steven</td>
         <td>19</td>
+      </tr>
       <tr>
         <td>Tommy</td>
         <td>20</td>
       </tr>
     </table>
+
   </body>
 </html>
